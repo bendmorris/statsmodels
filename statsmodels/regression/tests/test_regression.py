@@ -611,6 +611,9 @@ class TestNonlinearLS(TestDataDimensions):
         assert_almost_equal(self.res1.rsquared, self.res2.rsquared, DECIMAL_4)
         assert_almost_equal(self.res1.fvalue, self.res2.fvalue, DECIMAL_4)
         assert_almost_equal(self.res1.params, self.res2.params, -2)
+        assert_almost_equal(self.res1.bse, self.res2.bse, -2)
+        assert_almost_equal(self.res1.tvalues, self.res2.tvalues, DECIMAL_2)
+        assert_almost_equal(self.res1.pvalues, self.res2.pvalues, DECIMAL_3)
         
 
 def test_bad_size():
