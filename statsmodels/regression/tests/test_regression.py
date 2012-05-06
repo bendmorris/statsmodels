@@ -590,11 +590,9 @@ class TestNxNxOne(TestDataDimensions):
         cls.mod2.df_model += 1
         cls.res2 = cls.mod2.fit()
         
-class TestNonlinearLS(TestDataDimensions):
+class TestNonlinearLS(CheckRegressionResults):
     @classmethod
     def setupClass(cls):
-        super(TestNonlinearLS, cls).setupClass()
-        
         data = longley.load()
 
         def model_func(x, b0, b1, b2, b3, b4, b5, b6):
@@ -606,15 +604,7 @@ class TestNonlinearLS(TestDataDimensions):
         cls.mod2 = OLS(data.endog, add_constant(data.exog, prepend=True))
         cls.res1 = cls.mod1.fit()
         cls.res2 = cls.mod2.fit()                
-        
-    def test_linear(self):
-        assert_almost_equal(self.res1.rsquared, self.res2.rsquared, DECIMAL_4)
-        assert_almost_equal(self.res1.fvalue, self.res2.fvalue, DECIMAL_4)
-        assert_almost_equal(self.res1.params, self.res2.params, -2)
-        assert_almost_equal(self.res1.bse, self.res2.bse, -2)
-        assert_almost_equal(self.res1.tvalues, self.res2.tvalues, DECIMAL_2)
-        assert_almost_equal(self.res1.pvalues, self.res2.pvalues, DECIMAL_3)
-        
+
 
 def test_bad_size():
     np.random.seed(54321)
