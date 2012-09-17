@@ -563,6 +563,11 @@ class RegressionResults(base.LikelihoodModelResults):
     @cache_readonly
     def aic(self):
         return -2 * self.llf + 2 * (self.df_model + 1)
+        
+    @cache_readonly
+    def aicc(self):
+        k, n = self.df_model + 1, self.nobs
+        return self.aic + (2*k*(k+1))/(n-k-1)
 
     @cache_readonly
     def bic(self):
